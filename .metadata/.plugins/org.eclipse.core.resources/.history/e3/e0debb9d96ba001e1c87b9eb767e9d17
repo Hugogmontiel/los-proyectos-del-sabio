@@ -1,0 +1,31 @@
+package act_1;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class main {
+
+	public static void main(String[] args) {
+		
+		Taller a = new Taller();
+		
+		
+		String color = "amarillo";
+		String marca = "amarillo";
+		String matricula = "1234AAA";
+		
+		
+		
+		a.anadeElemento(matricula, color, marca);
+		
+		a.eliminarElemento(matricula);
+		
+		a.anadeElemento(matricula, color, marca);
+		a.anadeElemento("1222BBB", color, marca);
+		
+		a.visualizaMatriculas();
+		
+		
+	}
+
+}

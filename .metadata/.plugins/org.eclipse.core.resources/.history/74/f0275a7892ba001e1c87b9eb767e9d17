@@ -1,0 +1,38 @@
+package act_1;
+
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
+public class Taller {
+	
+	private HashMap<String, Coche> cochesTaller = new HashMap<>();
+	
+	
+	
+	public void anadeElemento(String matricula, String color, String marca) {
+		
+		
+		String regex = "^[0-9]{4}[A-Z]{3}$";
+		Pattern pattern = Pattern.compile(regex);
+		
+		Matcher matcher = pattern.matcher(matricula);
+		
+		if(matcher.matches()) {
+			
+				if(matricula.equals(cochesTaller)) {
+					
+				}
+				
+				else {
+					cochesTaller.put(matricula, new Coche(color, marca));
+					System.out.println("He llegado hasta aqui");
+				}
+			}
+		}
+	}
+	
+	
+	
+

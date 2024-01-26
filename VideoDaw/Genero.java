@@ -1,0 +1,5 @@
+
+public enum Genero {
+	DRAMA,CIENCIA_FICCION,ACCION,ROMANCE
+
+}

@@ -1,0 +1,37 @@
+package act_2;
+
+import java.util.HashMap;
+
+
+public class Agenda {
+	private HashMap<String, Contacto> contactoAgenda = new HashMap<>();
+	
+	public boolean anadeContacto(String nombre, String telefono, String correo) {
+		boolean anadido = false;
+		if(contactoAgenda.containsKey(nombre)) {
+			
+			
+		}
+		else {
+			contactoAgenda.put(nombre, new Contacto(nombre, telefono, correo));
+			anadido = true;
+		}
+		
+		return anadido;
+		
+	}
+	
+	public boolean buscarContacto(String nombre) {
+		boolean existe = false;
+		if(contactoAgenda.containsKey(nombre)) {
+			contactoAgenda.keySet().toString();
+			
+		}
+		
+		return existe;
+		
+	}
+	
+	
+	
+}

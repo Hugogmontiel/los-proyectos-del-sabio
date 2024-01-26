@@ -1,0 +1,19 @@
+package act_2;
+
+public class main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Agenda a = new Agenda();
+		
+		String nombre = "Alvaro";
+		String telefono = "684365128";
+		String matricula = "hugogm0514@gmail.com";	
+		
+		a.anadeContacto(nombre, telefono, matricula);
+		
+		a.buscarContacto(nombre);
+	}
+
+}

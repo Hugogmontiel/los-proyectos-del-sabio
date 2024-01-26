@@ -1,0 +1,82 @@
+package act_1;
+
+import java.util.Scanner;
+
+public class main {
+
+	public static void main(String[] args) {
+		
+		Scanner reader = new Scanner(System.in);
+		
+		Taller a = new Taller();
+		
+		
+		String color = "amarillo";
+		String marca = "amarillo";
+		String matricula = "1234AAA";
+		
+		
+		
+		a.anadeElemento(matricula, color, marca);
+		
+		a.eliminarElemento(matricula);
+		
+		a.anadeElemento("1222BBB", color, marca);
+		
+		System.out.println(a.visualizaMatriculas());
+		
+		System.out.println(a.visualizaCoches());
+		
+		System.out.println(a.visualizaTaller());
+		
+		
+		while(true) {
+			System.out.println("1) Añadir coche");
+			System.out.println("2) Eliminar coche");
+			System.out.println("3) Salir");
+	
+			String opcion = reader.nextLine();
+			
+			if(opcion.equalsIgnoreCase("1")) {
+				System.out.println("Introduce un color del coche");
+				
+				String c = reader.nextLine();
+				
+				System.out.println("Introduce la marca del coche");
+				
+				String m = reader.nextLine();
+				
+				System.out.println("Introduce la matricula del coche (EJ: 1111AAA)");
+				
+				String matri = reader.nextLine().toUpperCase();
+				
+				a.anadeElemento(matri, c, m);
+				
+				a.visualizaTaller();
+			}
+			
+			else if(opcion.equalsIgnoreCase("2")) {
+				
+				System.out.println("Introduce un color del coche");
+				
+				String c = reader.nextLine();
+				
+				System.out.println("Introduce la marca del coche");
+				
+				String m = reader.nextLine();
+				
+				System.out.println("Introduce la matricula del coche (EJ: 1111AAA)");
+				
+				String matri = reader.nextLine().toUpperCase();
+				
+				a.eliminarElemento(matricula);
+				
+				a.visualizaTaller();
+				
+			}
+			
+		}
+		
+	}
+
+}

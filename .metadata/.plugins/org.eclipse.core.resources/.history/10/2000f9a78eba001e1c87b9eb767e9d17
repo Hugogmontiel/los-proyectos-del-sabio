@@ -1,0 +1,22 @@
+package act_1;
+
+import java.util.HashMap;
+
+public class main {
+
+	public static void main(String[] args) {
+		
+		
+		Taller taller = null;
+		 HashMap<Taller, Coche> a = new HashMap<>();
+		
+		String color = "amarillo";
+		String marca = "amarillo";
+		String matricula = "1234 AAA";
+		
+		taller.añadeElemento(matricula, color, marca);
+		
+		System.out.println(taller);
+	}
+
+}
