@@ -33,7 +33,7 @@ public class Agenda {
 		}
 		
 		else {
-			System.out.println("No ha sido posible encontrar el contacto");
+			s = "No ha sido posible encontrar el contacto";
 			
 		}
 		return s;
@@ -55,6 +55,7 @@ public class Agenda {
 	
 	public String visualizaAgenda() {
 		return "El taller tiene" + contactoAgenda.entrySet().toString();
+		
 		
 	}
 	

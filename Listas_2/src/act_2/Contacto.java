@@ -18,7 +18,7 @@ public class Contacto {
 	
 	@Override
 	public String toString() {
-		return "Contacto [nombre=" + nombre + ", telefono=" + telefono + ", correo=" + correo + "]";
+		return "Contacto: \nNombre " + nombre + "\nTelefono " + telefono + "\nCorreo " + correo + "\n" ;
 	}
 
 	public boolean validatorNombre(String nombre) {
