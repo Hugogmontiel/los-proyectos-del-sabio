@@ -5,6 +5,23 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Act_1 {
+	
+	public static void imprimePositivo(int p) throws NumeroNegativoException {
+		
+		if(p < 0) {
+			throw new NumeroNegativoException();
+			
+		}
+	}
+	
+	public static void imprimeNegativo(int n) throws NumeroPositivoException {
+		
+		if(n > 0) {
+			throw new NumeroPositivoException();
+			
+		}
+	}
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -89,9 +106,57 @@ public class Act_1 {
 		
 			for(int i = 0; i < vector.length; i++) {
 				System.out.println(vector[i]);
-				
-			
 			
 		}
+			
+		//ejercicio 4
+			
+			System.out.println("\nEjercicio 4\n");
+			for(int i = 0; i < 5; i++) {
+				try {
+					System.out.println("Introduzca un número positivo");
+					reader = new Scanner(System.in);
+					int p = reader.nextInt();
+					imprimePositivo(p);
+				
+				}
+				catch(NumeroNegativoException e) {
+					System.out.println("Error, introduzca un número positivo");
+				
+				}
+			
+				catch(InputMismatchException e) {
+					System.out.println("Error, introduzca un número");
+				
+				}
+			
+				finally {
+					System.out.println("Introduzca un número negativo: ");
+				
+				}
+			
+				try {
+					reader = new Scanner(System.in);
+					int n = reader.nextInt();
+					imprimeNegativo(n);
+				}
+				catch (NumeroPositivoException e) {
+					System.out.println("Error, introduzca un número negativo");
+				
+				}
+			
+				catch (InputMismatchException e) {
+					System.out.println("Error, introduzca un número");
+				
+				}
+			}
+			
+		//ejercicio 5
+			System.out.println("\nEjercicio 5\n");
+			
+			
+			
+			
+			
 	}
 }
