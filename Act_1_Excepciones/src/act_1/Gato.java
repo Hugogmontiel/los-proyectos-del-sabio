@@ -1,5 +1,8 @@
 package act_1;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Gato {
 	private String nombre;
 	private int edad;
@@ -9,22 +12,26 @@ public class Gato {
 		this.edad = edad;
 	}
 	
-	public void imprimir() {
-		String s = "Gato [nombre=" + nombre + ", edad=" + edad + "]";
+	public String imprimir() {
+		return "Gato [nombre=" + nombre + ", edad=" + edad + "]";
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) throws NombreLongitudException {
-		if(nombre.length() < 3) {
+	public boolean setNombre(String nombre) throws NombreLongitudException {
+		boolean isValid = false;
+		Pattern pattern = Pattern.compile("[a-z].*");
+		Matcher matcher = pattern.matcher(nombre);
+		if(nombre.length() < 3 && !matcher.matches()) {
 			throw new NombreLongitudException(nombre.length());
 			
 		}
 		else {
 			this.nombre = nombre;
 		}
+		return isValid;
 	}
 
 	public int getEdad() {
