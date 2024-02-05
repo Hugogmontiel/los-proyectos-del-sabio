@@ -1,5 +1,6 @@
 package act_1;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 import java.util.Scanner;
@@ -43,6 +44,7 @@ public class Act_1 {
 		
 		catch (InputMismatchException e) {
 			System.out.println("Valor introducido incorrecto");
+			e.printStackTrace();
 			
 		}
 		
@@ -70,10 +72,12 @@ public class Act_1 {
 		}
 		catch (ArithmeticException e){
 			System.out.println("Error, no se puede dividir entre 0");
+			e.printStackTrace();
 			
 		}
 		catch (InputMismatchException e) {
 			System.out.println("Error, Introduzca un número");
+			e.printStackTrace();
 			
 		}
 		
@@ -100,6 +104,7 @@ public class Act_1 {
 			catch (InputMismatchException e) {
 				System.out.println("Error, Introduzca un número");
 				i--;
+				e.printStackTrace();
 			}
 		}
 		
@@ -122,11 +127,13 @@ public class Act_1 {
 				}
 				catch(NumeroNegativoException e) {
 					System.out.println("Error, introduzca un número positivo");
+					e.printStackTrace();
 				
 				}
 			
 				catch(InputMismatchException e) {
 					System.out.println("Error, introduzca un número");
+					e.printStackTrace();
 				
 				}
 			
@@ -142,11 +149,13 @@ public class Act_1 {
 				}
 				catch (NumeroPositivoException e) {
 					System.out.println("Error, introduzca un número negativo");
+					e.printStackTrace();
 				
 				}
 			
 				catch (InputMismatchException e) {
 					System.out.println("Error, introduzca un número");
+					e.printStackTrace();
 				
 				}
 			}
@@ -154,36 +163,101 @@ public class Act_1 {
 		//ejercicio 5
 			System.out.println("\nEjercicio 5\n");
 			
-			Gato [] gato = new Gato[2];
-			
-			gato [0]= new Gato("",1);
-				
 			
 			try {
-				reader = new Scanner(System.in);
-				System.out.println("Introduzca un nombre para un gato (3 letras o más)");
-				gato[0].setNombre(reader.nextLine());					
-				System.out.println("Introduzca una edad para un gato (que no sea negativa)");
-				gato[0].setEdad(reader.nextInt());
-				reader.nextLine();
+				Gato gato = new Gato();
+				gato.setNombre("Leo");
+				gato.setEdad(2);
+				System.out.println(gato.imprimir());
 				
+				Gato gatoError = new Gato();
+				gatoError.setNombre("Leo");
+				gatoError.setEdad(-1);
+				System.out.println(gatoError.imprimir());
 			}
 			
 			catch (NombreLongitudException e) {
 				System.out.println("Error, nombre de longitud de menos de 3 letras");
-				
+				e.printStackTrace();
 			}
 			
 			catch (EdadException e) {
 				System.out.println("Error, edad negativa");
-				
+				e.printStackTrace();	
 			}
 			
 			catch (InputMismatchException e) {
 				System.out.println("Error, valor incorrecto");
-
+				e.printStackTrace();
 			}
+			
+				
+			
+				
+				
+			
+			
+	
+	
+		//ejercicio 6
+			System.out.println("\nEjercicio 6\n");
+				
+			ArrayList<Gato> g = new ArrayList<Gato>();
+			
+			boolean error = false;
+			
+			for(int i = 0; i < 5; i ++) {
+				try {
+					Gato gatu = new Gato();
+					reader = new Scanner(System.in);
+					error = false;
+					
+					System.out.println("Introduzca un nombre para un gato (3 letras o más)");
+					String nombre = reader.nextLine();
+					gatu.setNombre(nombre);
+									
+					System.out.println("Introduzca una edad para un gato (que no sea negativa)");
+					int edad = reader.nextInt();
+					reader.nextLine();
+					gatu.setEdad(edad);
+					
+					g.add(gatu);
+					
+				
+				}
+			
+				catch (NombreLongitudException e) {
+					System.out.println("Error, nombre de longitud de menos de 3 letras");
+					error = true;
+					e.printStackTrace();
+					i--;
+				}
+			
+				catch (EdadException e) {
+					System.out.println("Error, edad negativa");
+					error = true;
+					e.printStackTrace();
+					i--;
+				}
+			
+				catch (InputMismatchException e) {
+					System.out.println("Error, valor incorrecto");
+					error = true;
+					e.printStackTrace();
+					i--;
+				}
+			}
+			
+			
+			if(error == false) {
+				for (int i = 0; i < g.size(); i++) {
+					System.out.println(g.get(i).imprimir());
+				}				
+			}
+			
 		
-			System.out.println(gato[0].imprimir());
+			
+			
+			
 	}
 }

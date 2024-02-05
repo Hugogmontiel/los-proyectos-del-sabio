@@ -11,6 +11,9 @@ public class Gato {
 		this.nombre = nombre;
 		this.edad = edad;
 	}
+	public Gato() {	
+		
+	}
 	
 	public String imprimir() {
 		return "Gato [nombre=" + nombre + ", edad=" + edad + "]";
@@ -22,9 +25,9 @@ public class Gato {
 
 	public boolean setNombre(String nombre) throws NombreLongitudException {
 		boolean isValid = false;
-		Pattern pattern = Pattern.compile("[a-z].*");
+		Pattern pattern = Pattern.compile("^[a-zA-Z]*$");
 		Matcher matcher = pattern.matcher(nombre);
-		if(nombre.length() < 3 && !matcher.matches()) {
+		if(nombre.length() < 3 || !matcher.matches()) {
 			throw new NombreLongitudException(nombre.length());
 			
 		}
@@ -43,8 +46,9 @@ public class Gato {
 			throw new EdadException(edad);
 			
 		}
-		
-		this.edad = edad;
+		else  {
+			this.edad = edad;
+		}
 	}
 	
 	
