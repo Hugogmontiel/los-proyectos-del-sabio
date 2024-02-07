@@ -88,7 +88,7 @@ public class Act_1 {
 		//ejercicio 3
 		
 		System.out.println("\nEjercicio 3\n");
-		Double [] vector = new Double[5];
+		double [] vector = new double[5];
 		for(int i = 0; i < vector.length; i++) {
 		
 		
@@ -191,14 +191,6 @@ public class Act_1 {
 				e.printStackTrace();
 			}
 			
-				
-			
-				
-				
-			
-			
-	
-	
 		//ejercicio 6
 			System.out.println("\nEjercicio 6\n");
 				
