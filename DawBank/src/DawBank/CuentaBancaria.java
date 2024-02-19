@@ -1,14 +1,16 @@
 package DawBank;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 public class CuentaBancaria {
 
 	
 	private String IBAN;
-	private String titular;
+	private Cliente cliente;
 	private Double saldo;
-	private int numMaxMovimientos = 100;
 	
-	private Movimiento[] coleccion;
+	private ArrayList<Movimiento> coleccion= new ArrayList<Movimiento>();
 	
 	private int numActualesMovimientos = 0;
 	
@@ -16,74 +18,56 @@ public class CuentaBancaria {
 	
 	
 	
-	public CuentaBancaria(String IBAN, String titular, Double saldo) {
+	public CuentaBancaria(String IBAN, Cliente cliente, Double saldo) {
 		
 	this.IBAN = IBAN;
-	this.titular = titular;
+	this.cliente = cliente;
 	this.saldo = saldo;
-	this.coleccion = new Movimiento[this.numMaxMovimientos];
-	this.numMaxMovimientos = 100; 
 	
-	}
-	
-
-	
-	public CuentaBancaria(String IBAN, String titular) {
-	
-	this.IBAN = IBAN;	
-	this.titular = titular;
-	this.saldo = 0.00;
-	this.numActualesMovimientos = 0;
 	
 	}
 	
 	public CuentaBancaria() {
-		this.numMaxMovimientos = 100; 
-		this.saldo = 0.00;
 		this.numActualesMovimientos = 0;
-		this.coleccion = new Movimiento[this.numMaxMovimientos];
+		this.saldo = 0.00;
 	}
 	
 
-
-
 	public void MostrarInfoCuentaBancaria() {
-		String s = "\nIBAN " + this.IBAN + ", Titular "+ this.titular + ", Saldo " + this.saldo; 
+		String s = "\nIBAN " + this.IBAN + ", Cliente "+ this.cliente + ", Saldo " + this.saldo; 
 		System.out.println(s);
 		
 		if(this.numActualesMovimientos > 0) {
 			System.out.println("Los movimientos son: ");
 			
-			for (int i = 0; i < numActualesMovimientos; i++) {
-				System.out.println("\n"+ (i + 1) + (". ") + this.coleccion[i].mostrarInfoMovimientos() +"\n");
-				
-			}
+				System.out.println(this.coleccion.toString());
+			
 		}
 	
 	}
 	
 	public void MostrarNombreCuenta() {
-		String d = "\nNombre de cuenta"+ this.titular;
+		String d = "\nNombre de cuenta"+ this.cliente;
 		System.out.println(d);
 	}
 	
-	public void addMovimiento(int ID, String fecha, Tipo tipo, Double cantidad) {
-		if(numActualesMovimientos < numMaxMovimientos) {
+	public void addMovimiento(int ID, LocalDateTime fecha, Tipo tipo, Double cantidad) {
+		
 			
 			Movimiento nuevoMovimiento = new Movimiento(ID, fecha, tipo, cantidad);
 			
-			coleccion[numActualesMovimientos] = nuevoMovimiento;
+			coleccion.add(nuevoMovimiento);
 			numActualesMovimientos++;
 			
-		}
+		
 	
 	}
 	
 	public void mostrarMovimiento() {
-		for(int i = 0; i < numActualesMovimientos; i++) {
-			System.out.println(coleccion[i].mostrarInfoMovimientos());
+		
+			System.out.println(coleccion.toString());
 			
-		}
+		
 		
 	}
 
@@ -96,12 +80,12 @@ public class CuentaBancaria {
 		
 	}
 
-	public String getTitular() {
-		return titular;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setTitular(String titular) {
-		this.titular = titular;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public Double getSaldo() {

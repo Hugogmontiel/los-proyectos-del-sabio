@@ -1,5 +1,10 @@
 package DawBank;
+
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class DawBank {
 
 	public static void main(String[] args) {
@@ -28,11 +33,12 @@ public class DawBank {
 			
 			if(seleccionMenu.equalsIgnoreCase("1")) {
 				
-				if(BancoDaw[0].getTitular() == null) {
+				if(BancoDaw[0].getCliente() == null) {
 					System.out.println("No tiene ninguna cuenta añadida: ");
 					System.out.println("Introduzca nombre de la cuenta: ");
-					
-					 BancoDaw[variableParaMenuCuenta].setTitular(reader.nextLine());
+					DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+					LocalDate W = LocalDate.parse("01-01-2000", format);;
+					 BancoDaw[variableParaMenuCuenta].setCliente(new Cliente("","",W,"","",""));
 					 variableParaMenuCuenta++;
 				}
 				
@@ -45,16 +51,16 @@ public class DawBank {
 					
 					/////////////////////////////////////
 					
-					if(BancoDaw[i].getTitular() == null) {
+					if(BancoDaw[i].getCliente() == null) {
 						
 						
 					}
 					////////////////////////////////////	
 						
 					
-					if(BancoDaw[i].getTitular() != null) {
+					if(BancoDaw[i].getCliente() != null) {
 						
-					System.out.println((i + 1) + ") " + BancoDaw[i].getTitular());
+					System.out.println((i + 1) + ") " + BancoDaw[i].getCliente());
 					variableParaMenuInfo = i;
 					
 					}
@@ -106,9 +112,13 @@ public class DawBank {
 					int ID = reader.nextInt();
 					reader.nextLine();
 					
-					System.out.println("Fecha (Formato dd//MM/yyyy): ");
+					System.out.println("Fecha (Formato DD-MM.YYYY hh:mm): ");
 					
-					String fecha = reader.nextLine();		
+					String fe = reader.nextLine();
+					
+					DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+					
+					LocalDateTime fecha = LocalDateTime.parse(fe, format);
 					
 					System.out.println("Tipo (RETIRADA o INGRESO)");
 					
@@ -165,8 +175,8 @@ public class DawBank {
 				if (seleccionSubMenu == variableParaMenuInfo + 2 && variableParaMenuInfo < BancoDaw.length) {
 					
 					System.out.println("\nInserta el nombre de la cuenta: ");
-					
-					BancoDaw[variableParaMenuCuenta].setTitular(reader.nextLine());
+					LocalDate E = LocalDate.parse("01-01-2000");
+					BancoDaw[variableParaMenuCuenta].setCliente(new Cliente("","",E,"","",""));
 					variableParaMenuCuenta++;
 					
 				}
@@ -189,8 +199,8 @@ public class DawBank {
 			
 				for(int i = 0; i < BancoDaw.length; i++) {
 					
-					if(BancoDaw[i].getTitular() != null) {
-						System.out.println((i + 1) + ") " + BancoDaw[i].getTitular());
+					if(BancoDaw[i].getCliente() != null) {
+						System.out.println((i + 1) + ") " + BancoDaw[i].getCliente());
 					
 					}
 					

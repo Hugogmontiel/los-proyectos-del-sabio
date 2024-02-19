@@ -1,14 +1,16 @@
 package DawBank;
 
+import java.time.LocalDateTime;
+
 public class Movimiento {
 
 
 	private int ID;
-	private String fecha;
+	private LocalDateTime fecha;
 	private Tipo tipo;
 	private Double cantidad;
 	
-	public Movimiento (int ID, String fecha, Tipo tipo, Double cantidad) {
+	public Movimiento (int ID, LocalDateTime fecha, Tipo tipo, Double cantidad) {
 		this.ID = ID;
 		this.fecha = fecha;
 		this.tipo = tipo;
@@ -16,14 +18,12 @@ public class Movimiento {
 	
 	}
 
-	public String mostrarInfoMovimientos() {
 	
-		String s = "ID "+ this.ID +", Fecha "+ this.fecha + ", Tipo "+ this.tipo + ", Cantidad "+ this.cantidad + "€";
-	
-		return s;
+	@Override
+	public String toString() {
+		return "Movimiento [ID=" + ID + ", fecha=" + fecha + ", tipo=" + tipo + ", cantidad=" + cantidad + "]";
 	}
 
-	
 	public int getID() {
 		return ID;
 	}
@@ -34,12 +34,12 @@ public class Movimiento {
 	}
 
 
-	public String getFecha() {
+	public LocalDateTime getFecha() {
 		return fecha;
 	}
 
 
-	public void setFecha(String fecha) {
+	public void setFecha(LocalDateTime fecha) {
 		this.fecha = fecha;
 	}
 

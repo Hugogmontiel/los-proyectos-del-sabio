@@ -14,6 +14,15 @@ public class Persona {
 			this.fechaNacimiento = fechaNacimiento;
 		}
 
+		
+		
+		@Override
+		public String toString() {
+			return "Persona [nombre=" + nombre + ", DNI=" + DNI + ", fechaNacimiento=" + fechaNacimiento + "]";
+		}
+
+
+
 		public String getNombre() {
 			return nombre;
 		}
