@@ -15,9 +15,6 @@ public class CuentaBancaria {
 	private int numActualesMovimientos = 0;
 	
 	
-	
-	
-	
 	public CuentaBancaria(String IBAN, Cliente cliente, Double saldo) {
 		
 	this.IBAN = IBAN;
@@ -51,17 +48,24 @@ public class CuentaBancaria {
 		System.out.println(d);
 	}
 	
-	public void addMovimiento(int ID, LocalDateTime fecha, Tipo tipo, Double cantidad) {
-		
-			
-			Movimiento nuevoMovimiento = new Movimiento(ID, fecha, tipo, cantidad);
-			
-			coleccion.add(nuevoMovimiento);
-			numActualesMovimientos++;
-			
-		
-	
-	}
+    public void addMovimiento(int ID, LocalDateTime fecha, Tipo tipo, Double cantidad) throws CuentaException, AvisarHaciendaException {
+        if (cantidad >= 3000.00) {
+            throw new AvisarHaciendaException();
+        }
+
+        if (tipo == Tipo.RETIRADA && saldo - cantidad < 0) {
+            throw new CuentaException();
+        }
+
+        Movimiento nuevoMovimiento = new Movimiento(ID, fecha, tipo, cantidad);
+        coleccion.add(nuevoMovimiento);
+
+        if (tipo == Tipo.INGRESO) {
+            saldo += cantidad;
+        } else {
+            saldo -= cantidad;
+        }
+    }
 	
 	public void mostrarMovimiento() {
 		

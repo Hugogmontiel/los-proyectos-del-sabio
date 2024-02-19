@@ -24,6 +24,7 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\Usuario\eclipse-workspace\los-proyectos-del-sabio\los-proyectos-del-sabio"/>
 			<item value="C:\Users\daw1\eclipse-workspace\a3_1"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">

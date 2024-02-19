@@ -4,12 +4,16 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class DawBank {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+		
+			
+		Scanner reader = new Scanner(System.in);
 		CuentaBancaria[] BancoDaw = new CuentaBancaria [5];
 		
 		for (int i = 0; i < BancoDaw.length; i++) {
@@ -17,7 +21,7 @@ public class DawBank {
 		    
 		}
 		
-		Scanner reader = new Scanner(System.in);
+		
 		boolean infiniteLoop_1 = true;
 		
 		int variableParaMenuCuenta = 0;
@@ -33,14 +37,41 @@ public class DawBank {
 			
 			if(seleccionMenu.equalsIgnoreCase("1")) {
 				
-				if(BancoDaw[0].getCliente() == null) {
-					System.out.println("No tiene ninguna cuenta añadida: ");
-					System.out.println("Introduzca nombre de la cuenta: ");
-					DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-					LocalDate W = LocalDate.parse("01-01-2000", format);;
-					 BancoDaw[variableParaMenuCuenta].setCliente(new Cliente("","",W,"","",""));
-					 variableParaMenuCuenta++;
+				if (BancoDaw[0].getCliente() == null) {
+					try {
+				    System.out.println("No tiene ninguna cuenta añadida: ");
+				    System.out.println("Introduzca nombre de la cuenta: ");
+				    String nombre = reader.nextLine();
+
+				    System.out.println("Introduzca DNI del cliente: ");
+				    String dni = reader.nextLine();
+				    
+				    System.out.println("Introduzca fecha de nacimiento (Formato DD-MM-YYYY): ");
+				    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+				    String fechaNacimientoStr = reader.nextLine();
+				    LocalDate fechaNacimiento = LocalDate.parse(fechaNacimientoStr, format);
+				    
+				    System.out.println("Introduzca número de teléfono: ");
+				    String telefono = reader.nextLine();
+
+				    System.out.println("Introduzca el correo electrónico: ");
+				    String email = reader.nextLine();
+
+				    System.out.println("Introduzca dirección: ");
+				    String direccion = reader.nextLine();
+				    
+				    Cliente clienteNuevo = new Cliente(nombre, dni, fechaNacimiento, telefono, email, direccion);
+				    BancoDaw[variableParaMenuCuenta].setCliente(clienteNuevo);
+				    variableParaMenuCuenta++;
+					}
+				    catch(DateTimeParseException e) {
+				    	System.out.println("Error: " + e.getMessage());
+						e.printStackTrace();
+				    }
+				    
 				}
+				
+
 				
 			boolean infiniteLoop_2 = true;
 			System.out.println("\nSeleccione una cuenta para modificar sus datos:\n");
@@ -142,18 +173,7 @@ public class DawBank {
 					
 					Double cantidad = reader.nextDouble();
 					reader.nextLine();
-					/////////////////////
-					
-					
-					
-					if(cantidad >= 3000.00) {
-						System.out.println("Avisa a hacienda");
-					
-					}
-					
-					
-					
-					////////////////////////
+
 					Double saldo = BancoDaw[seleccionSubMenu - 1].getSaldo();
 					
 					if(tipo == tipo.INGRESO) {
@@ -165,7 +185,18 @@ public class DawBank {
 						BancoDaw[seleccionSubMenu - 1].setSaldo((saldo - cantidad));
 						
 					}
-					BancoDaw[seleccionSubMenu - 1].addMovimiento(ID, fecha, tipo, cantidad);
+					try {
+						BancoDaw[seleccionSubMenu - 1].addMovimiento(ID, fecha, tipo, cantidad);
+					} 
+					catch (CuentaException e) {
+						System.out.println("Error: " + e.getMessage());
+						e.printStackTrace();
+					}
+					catch(AvisarHaciendaException e) {
+						System.out.println("Error: " + e.getMessage());
+						e.printStackTrace();
+					}
+					
 					
 					
 					
@@ -174,13 +205,39 @@ public class DawBank {
 				
 				if (seleccionSubMenu == variableParaMenuInfo + 2 && variableParaMenuInfo < BancoDaw.length) {
 					
-					System.out.println("\nInserta el nombre de la cuenta: ");
-					LocalDate E = LocalDate.parse("01-01-2000");
-					BancoDaw[variableParaMenuCuenta].setCliente(new Cliente("","",E,"","",""));
-					variableParaMenuCuenta++;
-					
-				}
-				
+					try {
+					    
+					    System.out.println("Introduzca nombre de la cuenta: ");
+					    String nombre = reader.nextLine();
+
+					    System.out.println("Introduzca DNI del cliente: ");
+					    String dni = reader.nextLine();
+					    
+					    System.out.println("Introduzca fecha de nacimiento (Formato DD-MM-YYYY): ");
+					    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+					    String fechaNacimientoStr = reader.nextLine();
+					    LocalDate fechaNacimiento = LocalDate.parse(fechaNacimientoStr, format);
+					    
+					    System.out.println("Introduzca número de teléfono: ");
+					    String telefono = reader.nextLine();
+
+					    System.out.println("Introduzca el correo electrónico: ");
+					    String email = reader.nextLine();
+
+					    System.out.println("Introduzca dirección: ");
+					    String direccion = reader.nextLine();
+					    
+					    Cliente clienteNuevo = new Cliente(nombre, dni, fechaNacimiento, telefono, email, direccion);
+					    BancoDaw[variableParaMenuCuenta].setCliente(clienteNuevo);
+					    variableParaMenuCuenta++;
+						}
+					    catch(DateTimeParseException e) {
+					    	System.out.println("Error: " + e.getMessage());
+							e.printStackTrace();
+					    }
+					    
+					}
+
 				if (seleccionSubMenu == variableParaMenuInfo + 3) {
 					infiniteLoop_2 = false;
 					
@@ -232,7 +289,11 @@ public class DawBank {
 			}
 		}
 		
-	}
+		}
+		
+		
+		
+	
 	
     public static boolean IBANValidator(String IBAN) {
         boolean isFormatOk = false;
