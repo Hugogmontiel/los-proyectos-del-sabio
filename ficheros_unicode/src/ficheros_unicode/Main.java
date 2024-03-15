@@ -2,6 +2,11 @@ package ficheros_unicode;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,46 +21,47 @@ public class Main {
 		
 		final String myPath ="./src/Resources/";
 		final String myFile = "Almacen.dat";
+		final String myFileTxt ="Almacen.txt";
 		String op;
 		Scanner reader = new Scanner(System.in);
 		
 		List<Producto> coleccion = new LinkedList<Producto>();
 		
+		boolean eof = false;
 		
-		try(FileReader myreader =  new FileReader(myPath+myFile);
-				BufferedReader buffer = new BufferedReader(myreader);)
+		try(FileInputStream  myreader =  new FileInputStream(myPath+myFile);
+				DataInputStream  buffer = new DataInputStream(myreader);)
 		{
-			String line = null;
-			do {
-
-				line = buffer.readLine();
-				if(line != null)
-				{
+			while (eof == false) {
+			String codigo = buffer.readUTF();
+			String nombre = buffer.readUTF();
+			int cantidad = buffer.readInt();
+			double precio = buffer.readDouble();
 					
 					
-					String [] elementos = line.split(",");
-					String codigo = elementos[0];
-					String nombre = elementos[1];
-					int cantidad = Integer.parseInt(elementos[2]);
-					double precio = Double.parseDouble(elementos[3]);
-					
-					
-					coleccion.add(new Producto(codigo, nombre, cantidad, precio));
-				}
-				
+			coleccion.add(new Producto(codigo, nombre, cantidad, precio));
 			}
-			while(line != null);
-			
+		}
+		catch(EOFException e)
+		{
+			eof = true;
+			System.out.println("Hemos llegado al final de la escritura del fichero \n");	
 		}
 		catch(IOException e)
 		{
-			System.out.println("Se ha producido un error en el manejo del fichero");
+			System.out.println("Ha ocurrido un error al I/O");
+			System.out.println(e.getMessage());
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println("Ha ocurrido un error inexperado");
 			System.out.println(e.getMessage());
 		}
 		finally {
 			System.out.println("La escritura ha finalizado con exito.");
 		}
-		
+	 
 		do {
 			System.out.println("1) Crear producto");
 			System.out.println("2) Mostrar productos existentes");
@@ -96,39 +102,36 @@ public class Main {
 			
 			if(op.equalsIgnoreCase("2")) {
 				
-				System.out.println(coleccion.toString());
+				System.out.println(coleccion.toString() + "\n");
 				
 				
 			}//op 2
 			
 			if(op.equalsIgnoreCase("3")) {
 				System.out.println("Introduzca el codigo que desee eliminar:");
-				
 				String elim = reader.nextLine();
 				int contador = 0;
-				try(FileReader myreader =  new FileReader(myPath+myFile);
-						BufferedReader buffer = new BufferedReader(myreader);)
+				int eliminarNumero = -1;
+				try(FileInputStream   myreader =  new FileInputStream  (myPath+myFile);
+						DataInputStream   buffer = new DataInputStream(myreader);)
 				{
-					String line = null;
-					do {
-
-						line = buffer.readLine();
-						if(line != null)
-						{	
-							String [] elementos = line.split(",");
-							String codigo = elementos[0];
+					for(Producto p : coleccion) {
+						
+						
+						if(p.getCodigo().equalsIgnoreCase(elim)) {
+							eliminarNumero = contador;
 							
-							if(codigo.equalsIgnoreCase(elim)) {
-								coleccion.remove(contador);
-								line = null;
-								
-							}
-							
-							contador++;
 						}
+						contador++;
 					}
-					while (line != null);
-				}
+					
+					if(eliminarNumero != -1) {
+						coleccion.remove(eliminarNumero);
+						
+					}
+					
+					}
+				
 				catch(IOException e)
 				{
 					System.out.println("Se ha producido un error en el manejo del fichero");
@@ -140,35 +143,43 @@ public class Main {
 			}//op 3
 			
 			if(op.equalsIgnoreCase("4")) {
-				
-				for(Producto p : coleccion) {
-	
-					try(FileWriter myWriter = new FileWriter(myPath+myFile, false);
-							BufferedWriter buffer = new BufferedWriter(myWriter)) {
-							buffer.write(p.getCodigo() + ",");
-							buffer.write(p.getNombre() + ",");
-							buffer.write(Integer.toString(p.getCantidad()) + ",");
-							buffer.write(Double.toString(p.getPrecio()));
-							buffer.newLine(); 
-					}
-					
-				
-				catch(IOException e) {
-				
-					System.out.println("Se ha producido un error en el manejo del fichero");
-					System.out.println(e.getMessage());
-				}
-				
-				}
-				
-			}
+			    try(FileOutputStream  myWriter = new FileOutputStream (myPath + myFile, false);
+			    		DataOutputStream  buffer = new DataOutputStream(myWriter)) {
+			        for (Producto p : coleccion) {
+			          
+			                buffer.writeUTF(p.getCodigo() + ",");
+			                buffer.writeUTF(p.getNombre() + ",");
+			                buffer.writeInt(p.getCantidad());
+			                buffer.writeDouble(p.getPrecio());
+
+			              
+			            }
+			        
+			    } 
+			    catch(IOException e) {
+			        System.out.println("Se ha producido un error en el manejo del fichero");
+			        System.out.println(e.getMessage());
+			    }
+			    
+			    try (BufferedWriter writer = new BufferedWriter(new FileWriter(myPath + myFileTxt))) {
+			        for (Producto p : coleccion) {
+			            
+			            writer.write(p.getCodigo() + "," + p.getNombre() + "," + p.getCantidad() + "," + p.getPrecio());
+			            writer.newLine(); 
+			        }
+			        System.out.println("Los productos se han guardado en el archivo de texto correctamente.");
+			    } 
+			    catch (IOException e) {
+			        System.out.println("Se ha producido un error al guardar los productos en el archivo de texto.");
+			        System.out.println(e.getMessage());
+			    }
+			
+			    
+			    
+			}		
 			
 		}
 		while(!op.equalsIgnoreCase("5"));
-		
-		
-		
-	
 		
 	}
 }
