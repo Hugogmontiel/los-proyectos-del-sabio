@@ -163,7 +163,7 @@ public class Main {
 			    
 			    try (BufferedWriter writer = new BufferedWriter(new FileWriter(myPath + myFileTxt))) {
 			        for (Producto p : coleccion) {
-			            
+			            	
 			            writer.write(p.getCodigo() + "," + p.getNombre() + "," + p.getCantidad() + "," + p.getPrecio());
 			            writer.newLine(); 
 			        }
