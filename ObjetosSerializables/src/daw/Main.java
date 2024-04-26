@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -67,6 +68,10 @@ public class Main {
 			System.out.println(e.getMessage());
 		}
 		
+		finally {
+			System.out.println("Se ha completado la lectura");
+		}
+		
 		
 		do {
 			
@@ -81,15 +86,15 @@ public class Main {
 			if(op.equalsIgnoreCase("1")) {
 				
 				
-				System.out.println("Introduzca el codigo");
+				System.out.println("Introduzca el ISBN");
 				
 				String ISBN = reader.nextLine();
 				
-				System.out.println("Introduzca el nombre");
+				System.out.println("Introduzca el Titulo");
 				
 				String titulo = reader.nextLine();
 				
-				System.out.println("Introduzca la cantidad de stock");
+				System.out.println("Introduzca el autor");
 				
 				String autor = reader.nextLine();
 				
@@ -117,16 +122,69 @@ public class Main {
 					
 		}//op 1
 			
+		if(op.equalsIgnoreCase("2")) {
+				
+			System.out.println(coleccion.toString() + "\n");
+
+		}//op 2
+		
+		if(op.equalsIgnoreCase("3")) {
+			System.out.println("Introduzca el ISBN que desee eliminar:");
+			String elim = reader.nextLine();
+			int contador = 0;
+			int eliminarNumero = -1;
+			
+			for(Libro l : coleccion) {
+				
+				
+				if(l.getISBN().equalsIgnoreCase(elim)) {
+					eliminarNumero = contador;
+					
+				}
+				contador++;
+			}
+			
+			if(eliminarNumero != -1) {
+				coleccion.remove(eliminarNumero);
+				
+			}
+	}//op 3
+	
+		
+		if(op.equalsIgnoreCase("4")) {
+			try(FileOutputStream file = new FileOutputStream(myPath+myFile);
+					ObjectOutputStream buffer = new ObjectOutputStream(file);) {
+				for(Libro l : coleccion) {
+					buffer.writeObject(l);
+				}
+				buffer.flush();
+			}
+			
+			catch(IOException ex){
+				ex.printStackTrace();
+			}
 			
 		}
 		
+		if(op.equalsIgnoreCase("5")) {
+			try(FileOutputStream file = new FileOutputStream(myPath+myFile);
+					ObjectOutputStream buffer = new ObjectOutputStream(file);) {
+				for(Libro l : coleccion) {
+					buffer.writeObject(l);
+					
+				}
+				 buffer.flush();
+			}
+			
+			catch(IOException ex){
+				ex.printStackTrace();
+			}
+		}
+		
+		}//bucle
+		
 		while(!op.equalsIgnoreCase("5"));
 			
-			
-		
-		
-		
-		
 	}
 
 }

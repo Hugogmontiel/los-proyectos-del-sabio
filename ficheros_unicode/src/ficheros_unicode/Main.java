@@ -112,9 +112,7 @@ public class Main {
 				String elim = reader.nextLine();
 				int contador = 0;
 				int eliminarNumero = -1;
-				try(FileInputStream   myreader =  new FileInputStream  (myPath+myFile);
-						DataInputStream   buffer = new DataInputStream(myreader);)
-				{
+				
 					for(Producto p : coleccion) {
 						
 						
@@ -129,17 +127,6 @@ public class Main {
 						coleccion.remove(eliminarNumero);
 						
 					}
-					
-					}
-				
-				catch(IOException e)
-				{
-					System.out.println("Se ha producido un error en el manejo del fichero");
-					System.out.println(e.getMessage());
-				}
-				
-				
-				
 			}//op 3
 			
 			if(op.equalsIgnoreCase("4")) {
@@ -147,8 +134,8 @@ public class Main {
 			    		DataOutputStream  buffer = new DataOutputStream(myWriter)) {
 			        for (Producto p : coleccion) {
 			          
-			                buffer.writeUTF(p.getCodigo() + ",");
-			                buffer.writeUTF(p.getNombre() + ",");
+			                buffer.writeUTF(p.getCodigo());
+			                buffer.writeUTF(p.getNombre());
 			                buffer.writeInt(p.getCantidad());
 			                buffer.writeDouble(p.getPrecio());
 
@@ -159,6 +146,7 @@ public class Main {
 			    catch(IOException e) {
 			        System.out.println("Se ha producido un error en el manejo del fichero");
 			        System.out.println(e.getMessage());
+			        
 			    }
 			    
 			    try (BufferedWriter writer = new BufferedWriter(new FileWriter(myPath + myFileTxt))) {

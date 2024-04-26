@@ -13,6 +13,9 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\daw1\eclipse-workspace\test_unitario"/>
+			<item value="D:\programacion\UD6Actividad02ficheros3"/>
+			<item value="D:\programacion\UD6Actividad02ficheros"/>
 			<item value="C:\Users\daw1\Downloads\Actividad06ProyectoMavenAdrianGonzalez"/>
 			<item value="C:\Users\daw1\eclipse-workspace"/>
 			<item value="C:\Users\daw1\eclipse-workspace\Listas_2"/>
@@ -25,6 +28,7 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\daw1\eclipse-workspace"/>
 			<item value="C:\Users\daw1\eclipse-workspace\examen_2"/>
 			<item value="C:\Users\Usuario\eclipse-workspace\los-proyectos-del-sabio\los-proyectos-del-sabio"/>
 			<item value="C:\Users\daw1\eclipse-workspace\a3_1"/>

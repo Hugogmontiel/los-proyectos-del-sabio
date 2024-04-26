@@ -1,9 +1,10 @@
 package daw;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Libro {
-	
+public class Libro implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String ISBN;
 	private String titulo;
 	private String autor;
@@ -17,6 +18,15 @@ public class Libro {
 		this.autor = autor;
 		this.fechaPublicion = fechaPublicion;
 	}
+
+	
+	
+	@Override
+	public String toString() {
+		return "Libro [ISBN=" + ISBN + ", titulo=" + titulo + ", autor=" + autor + ", fechaPublicion=" + fechaPublicion
+				+ "]";
+	}
+
 
 
 	public String getISBN() {
